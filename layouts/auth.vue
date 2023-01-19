@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-primary py-5">
     <slot />
   </div>
 </template>

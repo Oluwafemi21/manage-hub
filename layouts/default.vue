@@ -9,13 +9,19 @@
                 <nuxt-link class="font-bold underline" to="/login">Login</nuxt-link>
                 <nuxt-link class="font-bold underline" to="/sign-up">Sign Up</nuxt-link>
         </nav>
+
+        <FormBaseButton v-if="user" name="Sign Out" class="btn-alt" :onClick="signOut" />
     </header>
     <slot />
   </div>
 </template>
 
-<script>
-export default {
+<script setup>
+const client = useSupabaseAuthClient()
+const user = useSupabaseUser()
+const router = useRouter()
 
+const signOut = async () => {
+  await client.auth.signOut()
 }
 </script>
