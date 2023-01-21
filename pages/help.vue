@@ -1,5 +1,5 @@
 <template>
-    <h1>Help page</h1>
+    <h1 class="font-bold">Help page</h1>
 </template>
 
 <script setup>

@@ -1,4 +1,6 @@
+import { useUserStore } from "~~/store/user";
+
 export default function () {
-    const user = useSupabaseUser();
-    return user.value ? true : false;
+    const auth = useUserStore();
+    return auth.user ? true : false;
 }

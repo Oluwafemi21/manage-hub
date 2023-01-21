@@ -20,7 +20,7 @@
                         >Get Started</nuxt-link
                     >
                     <FormBaseButton
-                        v-if="user"
+                        v-if="auth.user"
                         name="Logout"
                         class="btn-primary"
                         :onClick="signOut"
@@ -33,14 +33,13 @@
 </template>
 
 <script setup>
-const client = useSupabaseAuthClient();
-const user = useSupabaseUser();
-const router = useRouter();
+import { useUserStore } from "~~/store/user";
+const auth = useUserStore();
+const route = useRouter();
 
 const signOut = async () => {
-    await client.auth.signOut();
-    alert("You have been signed out");
-    router.push("/login");
+    auth.logout();
+    route.push("/login");
 };
 </script>
 

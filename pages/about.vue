@@ -1,21 +1,24 @@
 <template>
     <div class="font-dm-sans">
-        <h1 class="text-red-500">About Page</h1>
-        <p>My about page</p>
-        <form class="my-10 px-6">
-            <FormBaseInput label="Name"></FormBaseInput>
-        </form>
-
-        user - {{ user ? user.user_metadata.full_name : "Loading..." }}
+        <h1 class="text-red-500 font-bold">About Page</h1>
+        <p>
+            {{
+                auth.user
+                    ? `${auth.user.user_metadata.full_name} is logged in`
+                    : "Loading..."
+            }}
+        </p>
     </div>
 </template>
 
 <script setup>
+import { useUserStore } from "../store/user";
 definePageMeta({
     middleware: ["auth"],
     title: "Manage Hub - About Us",
 });
-// import { ref } from 'vue'
+
+const auth = useUserStore();
 </script>
 
 <style></style>

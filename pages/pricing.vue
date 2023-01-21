@@ -1,5 +1,5 @@
 <template>
-    <h1>Pricing</h1>
+    <h1 class="font-bold">Pricing</h1>
 </template>
 
 <script setup>

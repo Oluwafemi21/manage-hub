@@ -99,9 +99,7 @@ definePageMeta({
     title: "Manage Hub - Create Account",
 });
 import { ref } from "vue";
-const client = useSupabaseClient();
-const user = useSupabaseUser();
-const router = useRouter();
+import { useUserStore } from "../store/user";
 
 const name = ref("");
 const email = ref("");
@@ -109,22 +107,16 @@ const number = ref("");
 const password = ref("");
 const password2 = ref("");
 const loading = ref(false);
-const signUp = async () => {
-    loading.value = true;
-    const { data, error } = await client.auth.signUp({
-        email: email.value,
-        password: password.value,
+const auth = useUserStore();
 
-        options: {
-            data: {
-                full_name: name.value,
-                phone: number.value,
-            },
-        },
-    });
-    if (data) {
+const signUp = () => {
+    loading.value = true;
+    try {
+        auth.createUser(email.value, password.value, name.value, number.value);
         loading.value = false;
-        router.push("/login");
+    } catch (error) {
+        console.log(error);
+        loading.value = false;
     }
 };
 </script>

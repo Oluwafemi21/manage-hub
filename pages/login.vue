@@ -71,7 +71,7 @@
                             </template>
                         </FormBaseButton>
                     </form>
-                    user - {{ auth.user }}
+
                     <p class="font-dm-sans">
                         Don't have an account?
                         <nuxt-link to="/sign-up" class="font-bold text-primary"
@@ -89,8 +89,6 @@ definePageMeta({ layout: "auth", title: "Manage Hub - Login" });
 import { ref } from "vue";
 import { useUserStore } from "../store/user";
 
-const router = useRouter();
-
 // Variable Declarations
 const email = ref("");
 const password = ref("");
@@ -102,7 +100,6 @@ const signIn = () => {
     loading.value = true;
     try {
         auth.login(email.value, password.value);
-        router.push("/");
         loading.value = false;
     } catch (error) {
         console.log(error);
