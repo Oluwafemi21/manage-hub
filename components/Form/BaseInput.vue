@@ -9,9 +9,13 @@
     >
      <label v-if="label">{{label}}</label>
      <!-- heroicons:eye -->
-     <div v-if="showIcon" class="flex cursor-pointer absolute h-100 items-center right-0 bottom-3 text-xl">
-        <Icon v-if="!isPasswordShown" name='heroicons:eye-slash' @click="showPassword"/>
-        <Icon v-else name='heroicons:eye' @click="hidePassword"/>
+     <div v-if="showIcon" class="flex cursor-pointer absolute items-center justify-center right-0 bottom-4 text-xl">
+        <button v-if="!isPasswordShown" @click="showPassword">
+            <Icon  name='heroicons:eye-slash' />
+        </button>
+            <button v-else  @click="hidePassword">
+                <Icon name='heroicons:eye' />
+            </button>
      </div>
   </div>
 </template>
@@ -57,11 +61,11 @@ const hidePassword = () =>{
 
 <style lang="postcss" scoped>
 .input-field{
-    @apply mb-2 border-b-2 border-black/20 transition duration-300 ease-in focus:outline-none focus:border-primary focus:shadow-vertical py-1 text-lg autofill:bg-yellow-300 focus:autofill:bg-white active:autofill:bg-white;
+    @apply mb-2 border-b-2 border-b-gray-600 transition duration-300 ease-in focus:outline-none focus:border-primary py-1 text-lg autofill:text-emerald-800;
 }
 
 label{
-    @apply text-gray-500 h-full absolute flex items-center font-dm-sans transition duration-300 ease-in text-lg;
+    @apply text-gray-500 h-full absolute flex items-center font-dm-sans transition duration-300 ease-in text-base;
 }
 
 .input-field:focus + label,.input-field:not(:placeholder-shown) + label {

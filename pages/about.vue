@@ -3,22 +3,19 @@
         <h1 class="text-red-500">About Page</h1>
         <p>My about page</p>
         <form class="my-10 px-6">
-            <FormBaseInput label="Name" v-model="firstName"></FormBaseInput>
+            <FormBaseInput label="Name"></FormBaseInput>
         </form>
 
-        {{ firstName }}
+        user - {{ user ? user.user_metadata.full_name : "Loading..." }}
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
 definePageMeta({
-  middleware: "auth",
+    middleware: ["auth"],
+    title: "Manage Hub - About Us",
 });
-const firstName = ref("")
-
+// import { ref } from 'vue'
 </script>
 
-<style>
-
-</style>
+<style></style>

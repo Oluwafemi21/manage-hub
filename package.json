@@ -1,16 +1,25 @@
 {
-  "private": true,
-  "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
-  },
-  "devDependencies": {
-    "@nuxtjs/supabase": "^0.3.0",
-    "@nuxtjs/tailwindcss": "^6.2.0",
-    "nuxt": "^3.0.0",
-    "nuxt-icon": "^0.2.6"
-  }
+    "private": true,
+    "scripts": {
+        "build": "nuxt build",
+        "dev": "nuxt dev",
+        "generate": "nuxt generate",
+        "preview": "nuxt preview",
+        "postinstall": "nuxt prepare"
+    },
+    "devDependencies": {
+        "@nuxtjs/supabase": "^0.3.0",
+        "@nuxtjs/tailwindcss": "^6.2.0",
+        "nuxt": "^3.0.0",
+        "nuxt-icon": "^0.2.6"
+    },
+    "dependencies": {
+        "@pinia/nuxt": "^0.4.6",
+        "@tailwindcss/forms": "^0.5.3",
+        "pinia": "^2.0.29",
+        "pinia-plugin-persistedstate": "^3.0.2"
+    },
+    "overrides": {
+        "vue": "latest"
+    }
 }

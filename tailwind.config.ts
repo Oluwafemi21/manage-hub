@@ -8,11 +8,17 @@ export default <Partial<Config>>{
         extend: {
             colors: {
                 primary: "#5352ED",
-                red: "#ccc",
+                secondary: "#8483F0",
+                grey: "#fafafa",
             },
             boxShadow: {
                 vertical: "0 1px 0 0 #5352ED",
             },
         },
     },
+    plugins: [
+        require("@tailwindcss/forms")({
+            strategy: "class",
+        }),
+    ],
 };
