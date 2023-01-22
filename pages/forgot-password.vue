@@ -8,7 +8,7 @@
                     Forgot your password?
                 </p>
                 <img
-                    src="~/assets/images/forgot-password.png"
+                    src="~/assets/icons/forgot-password.png"
                     alt="forgot password icon"
                 />
             </div>

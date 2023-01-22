@@ -7,10 +7,7 @@
                 <p class="font-clash font-medium text-3xl">
                     OTP code verification
                 </p>
-                <img
-                    src="~/assets/images/otp.png"
-                    alt="otp verification icon"
-                />
+                <img src="~/assets/icons/otp.png" alt="otp verification icon" />
             </div>
             <p class="font-dm-sans text-center text-black/70 mt-2">
                 Enter the verficication code sent to {{ $route.query.email }}

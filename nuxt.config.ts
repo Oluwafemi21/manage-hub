@@ -5,6 +5,7 @@ export default defineNuxtConfig({
         "nuxt-icon",
         "@nuxtjs/supabase",
         "@pinia/nuxt",
+        "@pinia-plugin-persistedstate/nuxt",
     ],
     // Global CSS: https://go.nuxtjs.dev/config-css
     css: ["@/assets/css/main.css"],
