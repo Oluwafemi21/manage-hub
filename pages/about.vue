@@ -13,12 +13,19 @@
 
 <script setup>
 import { useUserStore } from "../store/user";
+
+const route = useRoute();
+const auth = useUserStore();
+
+// Meta and SEO
 definePageMeta({
     middleware: ["auth"],
     title: "Manage Hub - About Us",
 });
-
-const auth = useUserStore();
+useHead({
+    meta: [{ property: "og:title", content: `${route.meta.title}` }],
+    title: `${route.meta.title}`,
+});
 </script>
 
 <style></style>

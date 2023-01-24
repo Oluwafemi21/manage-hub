@@ -20,13 +20,16 @@
                 ></FormBaseInput>
                 <p class="font-dm-sans">
                     You did not receive a code?
-                    <span @click="resendOTP" class="font-bold text-primary"
+                    <span
+                        tabindex="0"
+                        @click="resendOTP"
+                        class="cursor-pointer font-bold text-primary"
                         >Resend</span
                     >
                 </p>
 
                 <FormBaseButton
-                    name="send verification code"
+                    name="continue"
                     class="btn-primary btn w-full"
                     :onClick="verifyOTP"
                 >
@@ -47,6 +50,14 @@
 
 <script setup>
 import { ref } from "vue";
+const route = useRoute();
+definePageMeta({
+    title: "Manage Hub - OTP Verification",
+});
+useHead({
+    meta: [{ property: "og:title", content: `${route.meta.title}` }],
+    title: `${route.meta.title}`,
+});
 
 const loading = ref(false);
 

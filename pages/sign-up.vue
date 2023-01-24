@@ -1,7 +1,7 @@
 <template>
     <div class="container mx-auto px-2">
         <div class="min-h-screen">
-            <header class="py-4">
+            <header class="py-4 flex items-start">
                 <nuxt-link to="/">
                     <img
                         src="~/assets/images/logo/logo-1.svg"
@@ -19,7 +19,10 @@
                         courses, projects and more in an organized and efficient
                         manner.</span
                     >
-                    <img src="~/assets/images/sign-up.png" alt="" />
+                    <img
+                        src="~/assets/images/sign-up.png"
+                        alt="Sign Up Image"
+                    />
                 </div>
                 <div class="bg-white rounded-md px-7 py-10 self-start">
                     <p class="font-clash font-medium text-3xl">
@@ -52,11 +55,6 @@
                             :showIcon="true"
                         ></FormBaseInput>
 
-                        <nuxt-link
-                            to="/forgot-password"
-                            class="text-primary font-dm-sans hover:underline self-start"
-                            >Forgot password?</nuxt-link
-                        >
                         <label
                             class="flex items-center cursor-pointer gap-2 font-dm-sans select-none"
                         >
@@ -94,12 +92,20 @@
 </template>
 
 <script setup>
+const route = useRoute();
+
+// Meta and SEO
 definePageMeta({
     layout: "auth",
     title: "Manage Hub - Create Account",
 });
+
+useHead({
+    meta: [{ property: "og:title", content: `${route.meta.title}` }],
+    title: `${route.meta.title}`,
+});
+
 import { ref } from "vue";
-import { useUserStore } from "../store/user";
 
 const name = ref("");
 const email = ref("");
@@ -107,17 +113,28 @@ const number = ref("");
 const password = ref("");
 const password2 = ref("");
 const loading = ref(false);
-const auth = useUserStore();
 
-const signUp = () => {
+const signUp = async () => {
     loading.value = true;
-    try {
-        auth.createUser(email.value, password.value, name.value, number.value);
-        loading.value = false;
-    } catch (error) {
-        console.log(error);
-        loading.value = false;
-    }
+    await client.auth
+        .signUp({
+            email: email.value,
+            password: password.value,
+            options: {
+                data: {
+                    full_name: name.value,
+                    phone: number.value,
+                },
+            },
+        })
+        .then(() => {
+            router.push("/login");
+            loading.value = false;
+        })
+        .catch((err) => {
+            loading.value = false;
+            console.log(err);
+        });
 };
 </script>
 

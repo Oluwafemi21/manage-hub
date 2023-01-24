@@ -1,7 +1,7 @@
 <template>
     <div class="container mx-auto px-2">
         <div class="min-h-screen">
-            <header class="py-4">
+            <header class="py-4 flex items-start">
                 <nuxt-link to="/">
                     <img
                         src="~/assets/images/logo/logo-1.svg"
@@ -85,7 +85,6 @@
 </template>
 
 <script setup>
-definePageMeta({ layout: "auth", title: "Manage Hub - Login" });
 import { ref } from "vue";
 import { useUserStore } from "../store/user";
 
@@ -93,18 +92,40 @@ import { useUserStore } from "../store/user";
 const email = ref("");
 const password = ref("");
 const loading = ref(false);
+const client = useSupabaseAuthClient();
+const router = useRouter();
 const auth = useUserStore();
+const route = useRoute();
+
+// Meta and SEO
+definePageMeta({ layout: "auth", title: "Manage Hub - Login" });
+useHead({
+    meta: [{ property: "og:title", content: `${route.meta.title}` }],
+    title: `${route.meta.title}`,
+});
 
 // Logic
-const signIn = () => {
+const signIn = async () => {
     loading.value = true;
-    try {
-        auth.login(email.value, password.value);
-        loading.value = false;
-    } catch (error) {
-        console.log(error);
-        loading.value = false;
-    }
+    await client.auth
+        .signInWithPassword({ email: email.value, password: password.value })
+        .then(({ data }) => {
+            auth.user = data.user;
+            router.push("/");
+            loading.value = false;
+        })
+        .catch((error) => {
+            console.log(error);
+            loading.value = false;
+        });
+
+    // try {
+    //     auth.login(email.value, password.value);
+    //     loading.value = false;
+    // } catch (error) {
+    //     console.log(error);
+    //     loading.value = false;
+    // }
 };
 </script>
 

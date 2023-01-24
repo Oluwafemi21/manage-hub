@@ -5,42 +5,35 @@
         >
             <div class="flex items-center justify-center gap-2">
                 <p class="font-clash font-medium text-3xl">
-                    Forgot your password?
+                    Create new password
                 </p>
-                <img
-                    src="~/assets/icons/forgot-password.png"
-                    alt="forgot password icon"
-                />
             </div>
             <p class="font-dm-sans text-center text-black/70 mt-2">
-                Enter the phone number or the email address associated with your
-                account. We will send you a verification code.
+                Create a new password to secure your account
             </p>
             <form class="flex flex-col gap-5 my-8" @submit.prevent>
                 <FormBaseInput
-                    label="Email address"
-                    v-model="email"
-                    type="email"
+                    label="Enter your new password"
+                    v-model="password"
+                    type="password"
+                    :showIcon="true"
+                ></FormBaseInput>
+                <FormBaseInput
+                    label="Confirm your new password"
+                    v-model="confirmPassword"
+                    type="password"
+                    :showIcon="true"
                 ></FormBaseInput>
                 <FormBaseButton
-                    name="continue"
+                    name="Create"
                     class="btn-primary btn-icon w-full"
-                    :onClick="sendVerificationCode"
+                    :onClick="createPassword"
                 >
                     <template #buttonIcon v-if="loading">
                         <Loader />
                     </template>
                 </FormBaseButton>
             </form>
-            <p class="font-dm-sans">
-                Already have an account?
-                <nuxt-link
-                    to="/login"
-                    class="font-bold text-primary"
-                    title="Log in"
-                    >Log in</nuxt-link
-                >
-            </p>
         </div>
     </div>
 </template>
@@ -48,28 +41,25 @@
 <script setup>
 import { ref } from "vue";
 const route = useRoute();
-const router = useRouter();
 
-const email = ref("");
+const password = ref("");
+const confirmPassword = ref("");
 const loading = ref(false);
 
 // Meta and SEO
 definePageMeta({
-    title: "Manage Hub - Forgot Password",
+    title: "Manage Hub - Create Password",
 });
 useHead({
     meta: [{ property: "og:title", content: `${route.meta.title}` }],
     title: `${route.meta.title}`,
 });
 
-const sendVerificationCode = () => {
+const createPassword = () => {
     loading.value = true;
     setTimeout(() => {
         loading.value = false;
-        router.push({
-            name: "verify-otp",
-            query: { email: email.value },
-        });
+        console.log("Password created", password, confirmPassword);
     }, 2000);
 };
 </script>

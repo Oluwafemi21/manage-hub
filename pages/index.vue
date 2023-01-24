@@ -9,11 +9,15 @@
 
 <script setup>
 import { useUserStore } from "../store/user";
+const user = isAuthenticated();
+const auth = useUserStore();
+const route = useRoute();
 definePageMeta({
     title: "Manage Hub - Home",
 });
-
-const user = isAuthenticated();
-const auth = useUserStore();
+useHead({
+    meta: [{ property: "og:title", content: `${route.meta.title}` }],
+    title: `${route.meta.title}`,
+});
 </script>
 <style></style>
